@@ -1,0 +1,29 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block script %}
+<script src="{% static 'network/network.js' %}"></script>
+{% endblock script%}
+
+{% block body %}
+<h1>All Posts</h1>
+
+{% comment %} Show New Post section only when user is logged in {% endcomment %}
+{% if user.is_authenticated %}
+<div class="border rounded pl-4 pr-4">
+    <h3 class="mt-2">New Post</h3>
+
+    <form id="post_form" method="post">
+        <div class="form-group">
+            <textarea class="form-control" id="new_post" rows="3"></textarea>
+            <button class="btn btn-primary mt-2" type="submit">Post</button>
+        </div>
+
+    </form>
+</div>
+
+<div id="all_posts">
+</div>
+{% endif %}
+
+{% endblock %}
