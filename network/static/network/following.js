@@ -22,33 +22,18 @@ document.addEventListener("DOMContentLoaded", function () {
     return false;
   };
 
-  // If Follow button is click, change the API route to /following_posts
-  const following_link = document.querySelector("#following_link");
-  following_link.addEventListener("click", () => {
-    document.querySelector("#all_posts").innerHTML = "";
-    load_posts("/following_posts");
-  });
+  //   JS solution to switch the api route did not work as it did not refresh
+  //   Even if it does, it will always use the api route declare at the beginning
+  //   let all_posts_api_route = "/all_posts";
+  //   // If Follow button is click, change the API route to /following_posts
+  //   const following_link = document.querySelector("#following_link");
+  //   following_link.addEventListener("click", () => {
+  //     all_posts_api_route = "/following_posts";
+  //     alert(all_posts_api_route);
+  //   });
 
-  //   // Get all posts
-  //   fetch(`/all_posts`, {
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       // Hide the Edit section while showing all the posts
-  //       document.querySelector("#edit_post").style.display = "none";
-  //       document.querySelector("#profile").style.display = "none";
-  //       console.log("Get Post data");
-  //       console.log(data);
-  //       data.forEach((item) => show_post(item));
-  //     });
-
-  load_posts("/all_posts");
-});
-
-function load_posts(api_route) {
   // Get all posts
-  fetch(api_route, {
+  fetch(`/following_posts`, {
     method: "GET",
   })
     .then((response) => response.json())
@@ -56,17 +41,11 @@ function load_posts(api_route) {
       // Hide the Edit section while showing all the posts
       document.querySelector("#edit_post").style.display = "none";
       document.querySelector("#profile").style.display = "none";
-      //   console.log("Reponse from post api");
-      //   console.log(response);
       console.log("Get Post data");
-      //   console.log(data);
-      //   data.forEach((item) => show_post(item));
-
-      // Test with Following pagee
-      console.log(data["posts"]);
-      data["posts"].forEach((item) => show_post(item));
+      console.log(data);
+      data.forEach((item) => show_post(item));
     });
-}
+});
 
 function show_post(post) {
   console.log("post content:");
